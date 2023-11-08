@@ -1,15 +1,19 @@
 import http from 'k6/http';
-import { sleep } from 'k6';
+import { check } from 'k6';
 
 export const options = {
-    stages: [
-        { duration: '1s', target: 300 },
-        { duration: '1s', target: 0 },
-    ],
+    scenarios: {
+        spike: {
+            executor: 'constant-vus',
+            vus: 9000,
+            duration: '5s',
+            gracefulStop: '5m',
+        },
+    },
 };
 
 export default function () {
-    http.get('http://54.180.78.85/hello');
-    sleep(1);
+    const res = http.get('http://54.180.78.85/hello');
+    check(res, { 'is status 200': (r) => r.status == 200 });
 };
 
