@@ -13,7 +13,7 @@ export const options = {
 };
 
 export default function () {
-    const res = http.get('http://43.202.113.49:8084/hello');
+    const res = http.get('http://${TARGET_IP}/hello');
     check(res, { 'is status 200': (r) => r.status == 200 });
 };
 
