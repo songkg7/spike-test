@@ -5,7 +5,7 @@ export const options = {
     scenarios: {
         spike: {
             executor: 'constant-vus',
-            vus: 9000,
+            vus: 18000,
             duration: '5s',
             gracefulStop: '5m',
         },
@@ -13,7 +13,7 @@ export const options = {
 };
 
 export default function () {
-    const res = http.get('http://54.180.78.85/hello');
+    const res = http.get('http://43.202.113.49:8084/hello');
     check(res, { 'is status 200': (r) => r.status == 200 });
 };
 
